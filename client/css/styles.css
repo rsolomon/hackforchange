@@ -2,5 +2,7 @@
 
 /* Signup */
 
-
+.signup-prompt h1 {
+  display: inline;
+}
 
