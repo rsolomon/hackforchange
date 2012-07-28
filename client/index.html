@@ -7,7 +7,7 @@
   </head>
   <body>
     <div class="container">
-      <div id="carbonizr-signup" class="row signup-prompt">
+      <div id="signup-view" class="row signup-prompt hide">
         <div class="span6">
           <img src="img/co2-100.png"/><h1>Carbonizr</h1>
           <form id="login" class="form-vertical well">
@@ -39,6 +39,9 @@
           </form>
         </div>
       </div>
+      <div id="carbonizer" class="hide">
+        App
+      </div>
   </div>
 
     <!-- javascript -->
@@ -47,7 +50,53 @@
     <script src="lib/backbone/backbone.js"></script>
     <script src="lib/bootstrap/js/bootstrap.js"></script>
     <script>
+      window.co2 = window.co2 || { };
+      window.co2.view = window.co2.view || { };
       $(function() {
+        co2.view.AppView = Backbone.View.extend({
+          el: $("#carbonizer"),
+
+          initialize: function() {
+            this.render();
+          },
+
+          render: function() {
+            this.$el.show();
+          }
+        });
+        co2.view.SignupView = Backbone.View.extend({
+          el: $("#signup-view"),
+
+          signupForm: $("#signup"),
+          loginForm: $("#login"),
+
+          events: {
+            "submit #login": "login",
+            "submit #signup": "signup",
+          },
+
+          initialize: function() {
+            this.render();
+          },
+
+          render: function() {
+            this.$el.show();
+          },
+
+          login: function() {
+            alert("trying to login");
+          },
+
+          signup: function() {
+            alert("trying to signup");
+          }
+        });
+        var loggedIn = Date.now() % 2 == 0;
+        if (loggedIn) {
+          new co2.view.AppView();
+        } else {
+          new co2.view.SignupView();
+        }
       });
     </script>
   </body>
