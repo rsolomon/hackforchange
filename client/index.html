@@ -3,15 +3,40 @@
   <head>
     <!-- Stylesheets -->
     <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
     <div class="container">
-      <div id="carbonizr-signup">
-        <form id="login">
-          <input type="text" class="span3" placeholder="Email">
-          <input type="password" class="span3" placeholder="Password">
-          <button type="submit" class="btn">Login</button
-        </form>
+      <div id="carbonizr-signup" class="row signup-prompt">
+        <div class="span6">
+          <form id="login" class="form-vertical well">
+            <fieldset>
+              <legend>Log-in</legend>
+              <div class="control-group">
+                <input type="text" class="span3" placeholder="Email"><br/>
+                <input type="password" class="span3" placeholder="Password"><br/>
+                <button type="submit" class="btn btn-primary">Login</button>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+        <div class="span6">
+          <form id="signup" class="form-vertical well">
+            <fieldset>
+              <legend>Sign up</legend>
+              <div class="control-group">
+                <input type="text" class="span3" placeholder="Your Name"><br/>
+                <input type="text" class="span3" placeholder="Email"><br/>
+                <input type="password" class="span3" placeholder="Password"><br/>
+                <button type="submit" class="btn btn-primary">Login</button>
+                <br/>
+                <br/>
+                <h5>Or</h5>
+                Do OAuth
+              </div>
+            </fieldset>
+          </form>
+        </div>
       </div>
   </div>
 
