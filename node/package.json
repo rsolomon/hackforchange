@@ -3,6 +3,5 @@
   "version": "0.0.1",
   "dependencies": {
     "node-static": "",
-    "node-parse-api": "0.1.0"
   }
 }

@@ -34,6 +34,7 @@ var co2 = {
         'Content-Type': 'text/json',
         'Access-Control-Allow-Origin': '*'
       });
+      Parse = require("Parse");
       console.log("query " + query);
       query = '';
 
