@@ -15,9 +15,6 @@ window.co2.view.AddFlightView = Backbone.View.extend({
         departing: departing
       }
     });
-//    _.each(this.$('input'), function(input) {
-//      alert($(input).data('selected'));
-//    });
   },
 
   initialize: function() {

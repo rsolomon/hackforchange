@@ -49,11 +49,19 @@
         </div>
         <div class="row">
           <div id="add-info" class="span6">
-            <ul class="nav nav-tabs">
-              <li><a href="#car" data-toggle="tab"><i class="icon-truck"></i></a></li>
-              <li><a href="#plane" data-toggle="tab"><i class="icon-plane"></i></a></li>
+            <ul class="nav nav-tabs" id="add-info-tabs">
+              <li><a href="#tab-info-car" data-toggle="tab"><i class="icon-truck"></i></a></li>
+              <li><a href="#tab-info-plane" data-toggle="tab"><i class="icon-plane"></i></a></li>
             </ul>
-            <div class="add-flight"></div>
+
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab-info-car">
+                COMING SOON
+              </div>
+              <div class="tab-pane" id="tab-info-plane">
+                <div class="add-flight"></div>
+              </div>
+            </div>
           </div>
           <div id="notifications" class="span6">
             Bla bla bla
@@ -113,18 +121,18 @@
     <script src="js/collection/flight_emission.js"></script>
     <script src="js/collection/flight.js"></script>
     <script src="js/view/add_flight.js"></script>
+    <script src="js/view/add_info.js"></script>
     <script>
       $(function() {
-        var addFlightView = new co2.view.AddFlightView({
-          el: '.add-flight',
-          collection: new co2.collection.FlightEmissionCollection
-        });
-
         'use strict'
         var usePushState = false; // change when deployed
         co2.appRouter = new co2.router.Router();
         Backbone.history.start({ pushState: usePushState });
         co2.appRouter.navigate("app", { trigger: true });
+
+        var addInfoView = new co2.view.AddInfoView({
+          el: '#add-info'
+        });
       });
     </script>
 
@@ -132,12 +140,10 @@
     <!-- TEMPLATES -->
     <script id="template-add-flight" type="text/x-handlebars-template">
       <h3>Add Flight</h3>
-      <label>Departing Airport:
-        <input class="flight-departing" type="text" />
-      </label>
-      <label>Arriving Airport:
-        <input class="flight-arriving" type="text" />
-      </label>
+      <label>Departing Airport</label>
+      <input class="flight-departing" type="text" />
+      <label>Arriving Airport</label>
+      <input class="flight-arriving" type="text" />
       <button>Add</button>
     </script>
   </body>

@@ -26,3 +26,7 @@ body {
     font-size: 24px;
 }
 
+#add-info .tab-pane {
+    padding: 0 15px 15px 15px;
+}
+
