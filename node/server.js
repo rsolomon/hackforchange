@@ -5,7 +5,7 @@ var qs = require('querystring');
 var nodeStatic = require('node-static');
 var util = require('util');
 
-var file = new(nodeStatic.Server)('../client');
+var file = new(nodeStatic.Server)();
 
 var co2 = {
   routes: {

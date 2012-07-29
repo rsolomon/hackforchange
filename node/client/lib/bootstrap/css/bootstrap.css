@@ -1501,7 +1501,7 @@ table .span24 {
 @font-face {
   font-family: 'FontAwesome';
   src: url('../../fontawesome/font/fontawesome-webfont.eot');
-  src: url('../../fontawesome/font/fontawesome-webfont.eot?#iefix') format('embedded-opentype'), url('../../fontawesome/font/fontawesome-webfont.woff') format('woff'), url('../../fontawesome/font/fontawesome-webfont.ttf') format('truetype'), url('../../fontawesome/font/fontawesome-webfont.svg#FontAwesome') format('svg');
+  src: url('../../fontawesome/font/fontawesome-webfont.eot') format('embedded-opentype'), url('../../fontawesome/font/fontawesome-webfont.woff') format('woff'), url('../../fontawesome/font/fontawesome-webfont.ttf') format('truetype'), url('../../fontawesome/font/fontawesome-webfont.svg#FontAwesome') format('svg');
   font-weight: normal;
   font-style: normal;
 }

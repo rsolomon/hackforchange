@@ -1,5 +1,5 @@
 window.co2.collection.AMEECollection = Backbone.Collection.extend({
-  'url': 'http://localhost:1337/amee',
+  'url': '/amee',
   data: { },
   fetch: function(options) {
     var options = options || {};
