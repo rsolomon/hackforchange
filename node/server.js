@@ -27,6 +27,15 @@ var co2 = {
   },
 
   routes: {
+    'sms': function(req, res) {
+      var urlParts = url.parse(req.url),
+        query = urlParts.query;
+      res.writeHead(200, {
+        'Content-Type': 'text/json',
+        'Access-Control-Allow-Origin': '*'
+      });
+      res.end("<?xml version='1.0' encoding='UTF-8'?><Response><Sms>Your request was " + query + "</Sms></Response>");
+    },
 
     /**
      * Search API for flight information
@@ -45,8 +54,7 @@ var co2 = {
       }
 
       res.writeHead(200, {
-        'Content-Type': 'text/json',
-        'Access-Control-Allow-Origin': '*'
+        'Content-Type': 'text/xml',
       });
 
       var resp = {
