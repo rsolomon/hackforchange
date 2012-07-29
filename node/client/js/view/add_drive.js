@@ -2,7 +2,19 @@ window.co2.view.AddDriveView = Backbone.View.extend({
   _addDriveFormTemplate: '#template-add-drive',
 
   events: {
-    'click button': 'onSubmitClick'
+    'click button': 'onSubmitClick',
+    'click .drive-ms6': 'onMazdaClick',
+    'click .drive-sub': 'onSubiClick'
+  },
+
+  onMazdaClick: function(e) {
+    this.$('.drive-mileage').val('19');
+    return false;
+  },
+
+  onSubiClick: function(e) {
+    this.$('.drive-mileage').val('23');
+    return false;
   },
 
   onSubmitClick: function() {

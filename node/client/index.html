@@ -209,28 +209,43 @@
     </script>
 
     <script id="template-add-drive" type="text/x-handlebars-template">
-      <h3>Add Car Trip</h3>
-      <label>Mileage</label>
-      <input class="drive-mileage" type="text" />
-      <label>Distance</label>
-      <input class="drive-distance" type="text" />
-      <label>Date</label>
-      <input class="drive-date" type="text" />
-      <div class="button-row">
-        <button>Add</button>
+      <div class="tab-block tab-block-left">
+        <h3>Add Car Trip</h3>
+        <label>Mileage</label>
+        <input class="drive-mileage" type="text" />
+        <label>Distance</label>
+        <input class="drive-distance" type="text" />
+        <label>Date</label>
+        <input class="drive-date" type="text" />
+        <div class="button-row">
+          <button>Add</button>
+        </div>
+      </div>
+      <div class="tab-block tab-block-right">
+        <h3>Your Cars</h3>
+        <ul>
+          <li><a href="#" class="drive-ms6">2007 Mazdaspeed6</a></li>
+          <li><a href="#" class="drive-sub">2012 Subaru Forester</a></li>
+        </ul>
       </div>
     </script>
 
     <script id="template-add-utils" type="text/x-handlebars-template">
-      <h3>Add Your Utility Bill</h3>
-      <label>Gas (ccf)</label>
-      <input class="utils-gas" type="text" />
-      <label>Electricity (kH)</label>
-      <input class="utils-electricity" type="text" />
-      <label>Date</label>
-      <input class="utils-date" type="text" />
-      <div class="button-row">
-        <button>Add</button>
+      <div class="tab-block tab-block-left">
+        <h3>Add Your Utility Bill</h3>
+        <label>Gas (ccf)</label>
+        <input class="utils-gas" type="text" />
+        <label>Electricity (kH)</label>
+        <input class="utils-electricity" type="text" />
+        <label>Date</label>
+        <input class="utils-date" type="text" />
+        <div class="button-row">
+          <button>Add</button>
+        </div>
+      </div>
+      <div class="tab-block tab-block-right">
+        <h3>OR</h3>
+        <div><button>Import from PG&E</button></div>
       </div>
     </script>
   </body>
