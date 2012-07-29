@@ -12,3 +12,8 @@ body {
   display: inline;
 }
 
+/* Content */
+
+.score h2, h3 {
+  display: inline;
+}
