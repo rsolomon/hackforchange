@@ -47,4 +47,16 @@
     yearly[year] = yearly[year] ? yearly[year] + cost : cost;
     this.set("yearly", yearly);
   }
+}, {
+  refreshStats: function(cost) {
+    var  user = Parse.User.current(),
+      stats;
+    stats = user.get("stats");
+    stats.addCo2Cost(cost);
+    stats.save({}, {
+      success: function() {
+        console.log("success");
+      }
+    });
+  }
 });
