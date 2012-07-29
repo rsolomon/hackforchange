@@ -112,6 +112,8 @@
                   </tr>
                 </tbody>
               </table>
+              <table id="recent-events" class="table table-striped">
+              </table>
             </div>
           </div>
         </div>
@@ -182,6 +184,7 @@
     <script src="js/collection/flight.js"></script>
     <script src="js/view/stats.js"></script>
     <script src="js/view/interval-stats.js"></script>
+    <script src="js/view/recent_events.js"></script>
     <script src="js/view/add_drive.js"></script>
     <script src="js/view/add_flight.js"></script>
     <script src="js/view/add_utils.js"></script>
@@ -193,25 +196,6 @@
         co2.appRouter = new co2.router.Router();
         Backbone.history.start({ pushState: usePushState });
         co2.appRouter.navigate("app", { trigger: true });
-
-        var stats = Parse.User.current().get('stats');
-
-        var statsView = new co2.view.StatsView({
-          el: "#stats",
-          model: stats
-        });
-
-        var intervalStatsView = new co2.view.IntervalStatsView({
-          el: "#interval-stats",
-          model: stats
-        });
-
-        var addInfoView = new co2.view.AddInfoView({
-          el: '#add-info',
-          model: stats
-        });
-
-        stats.fetch();
       });
     </script>
 
@@ -269,6 +253,22 @@
         <h3>OR</h3>
         <div><a href="https://www.pge.com/eum/login?TYPE=100663297&REALMOID=06-908d4385-f04b-1024-9b18-8304711d0cb3&GUID=&SMAUTHREASON=0&METHOD=GET&SMAGENTNAME=www.pge.com&TARGET=-SM-https%3a%2f%2fwww%2epge%2ecom%2fmyenergyweb%2fappmanager%2fpge%2fcustomer"><button>Import from PG&E</button></a></div>
       </div>
+    </script>
+    <script id="template-recent-events" type="text/x-handlebars-template">
+      <thead>
+        <tr><th>
+          Recent Activity
+        </th></tr>
+      </thead>
+      <tbody>
+        {{#each events}}
+          <tr>
+            <td>{{formatDate date}}</td>
+            <td>{{icon category}}</td>
+            <td>{{cost}} CO<sup>2</sup> Kg</td>
+          </tr>
+        {{/each}}
+      </tbody>
     </script>
   </body>
 </html>
