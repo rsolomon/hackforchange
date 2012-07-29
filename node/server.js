@@ -28,7 +28,7 @@ var co2 = {
 
   routes: {
     'sms': function(req, res) {
-      var urlParts = url.parse(req.url),
+      var urlParts = url.parse(req.url, true),
         query = urlParts.query;
       res.writeHead(200, {
         'Content-Type': 'text/json',
@@ -36,7 +36,8 @@ var co2 = {
       });
       console.log("query " + query);
       query = '';
-      res.end('<?xml version="1.0" encoding="UTF-8" ?>" +
+
+      res.end('<?xml version="1.0" encoding="UTF-8" ?>' +
           '<Response>' +
               '<Sms>Query = ' + query + '</Sms>' +
           '</Response>');
