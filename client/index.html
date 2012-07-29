@@ -2,10 +2,12 @@
 <html lang="en">
   <head>
     <!-- Stylesheets -->
+    <link rel="stylesheet" href="lib/autocomplete/styles.css" />
     <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
+    <div class="add-flight"></div>
     <div class="container">
       <div id="signup-view" class="row signup-prompt hide">
         <div class="span6">
@@ -49,12 +51,19 @@
     <script src="lib/underscore/underscore.js"></script>
     <script src="lib/backbone/backbone.js"></script>
     <script src="lib/bootstrap/js/bootstrap.js"></script>
+    <script src="lib/handlebars/handlebars.js"></script>
+    <script src="lib/autocomplete/jquery.autocomplete.js"></script>
     <script src="js/common/namespace.js"></script>
     <script src="js/collection/base_amee.js"></script>
     <script src="js/collection/flight_emission.js"></script>
     <script src="js/collection/flight.js"></script>
+    <script src="js/view/add_flight.js"></script>
     <script>
       $(function() {
+        var addFlightView = new co2.view.AddFlightView({
+          el: '.add-flight'
+        });
+
         co2.view.AppView = Backbone.View.extend({
           el: $("#carbonizer"),
 
@@ -100,6 +109,19 @@
           new co2.view.SignupView();
         }
       });
+    </script>
+
+
+    <!-- TEMPLATES -->
+    <script id="template-add-flight" type="text/x-handlebars-template">
+      <h3>Add Flight</h3>
+      <label>Departing Airport:
+        <input type="text" />
+      </label>
+      <label>Arriving Airport:
+        <input type="text" />
+      </label>
+      <button>Add</button>
     </script>
   </body>
 </html>
