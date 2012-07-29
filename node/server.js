@@ -5,27 +5,28 @@ var qs = require('querystring');
 var nodeStatic = require('node-static');
 var util = require('util');
 
-var file = new(nodeStatic.Server)();
+var file = new(nodeStatic.Server)('./client');
 
 var co2 = {
-  routes: {
-    'client': function(req, res) {
-      req.addListener('end', function() {
-        file.serve(req, res, function(err, result) {
-          if (err) {
-            console.error('Error serving %s - %s', req.url, err.message);
-            if (err.status === 404 || err.status === 500) {
-              file.serveFile(util.format('client/%d.html', err.status), err.status, {}, req, res);
-            } else {
-              res.writeHead(err.status, err.headers);
-              res.end();
-            }
+  serveStatic: function(req, res) {
+    req.addListener('end', function() {
+      file.serve(req, res, function(err, result) {
+        if (err) {
+          console.error('Error serving %s - %s', req.url, err.message);
+          if (err.status === 404 || err.status === 500) {
+            file.serveFile(util.format('%d.html', err.status), err.status, {}, req, res);
           } else {
-            console.log('%s - %s', req.url, res.message);
+            res.writeHead(err.status, err.headers);
+            res.end();
           }
-        });
+        } else {
+          console.log('%s - %s', req.url, res.message);
+        }
       });
-    },
+    });
+  },
+
+  routes: {
 
     /**
      * Search API for flight information
@@ -129,7 +130,7 @@ http.createServer(function (req, res) {
   if (co2.routes[pathname]) {
     co2.routes[pathname](req, res);
   } else {
-    res.end(pathname + ' not found.');
+    co2.serveStatic(req, res);
   }
 }).listen(8080);
 console.log('Server running at http://127.0.0.1:8080/');
