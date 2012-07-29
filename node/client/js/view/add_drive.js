@@ -14,7 +14,7 @@ window.co2.view.AddDriveView = Backbone.View.extend({
       var gallons = distance / mileage;
       var calcCarbon = gallons * (19/6);
       var event = new co2.object.Co2Event({
-        category: 'flight',
+        category: 'drive',
         cost: calcCarbon,
         date: new Date(this.$('.drive-date').val())
       });
