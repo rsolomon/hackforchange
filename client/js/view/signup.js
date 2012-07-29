@@ -21,8 +21,8 @@ window.co2.view.SignupView = Backbone.View.extend({
     var self = this, loginData =  self.loginForm.formParams();
     Parse.User.logIn(loginData.email, loginData.password, {
       success: function(user) {
-        co2.appRouter.navigate("app", { trigger: true });
         self.loginForm[0].reset();
+        co2.appRouter.navigate("app", { trigger: true });
       },
       error: function(user, error) {
         console.log("error " + error);
@@ -38,8 +38,8 @@ window.co2.view.SignupView = Backbone.View.extend({
     user.set(signupData);
     user.signUp(null, {
       success: function(user) {
-        co2.appRouter.navigate("app", { trigger: true });
         self.signupForm[0].reset();
+        co2.appRouter.navigate("app", { trigger: true });
       },
       error: function(user, error) {
         console.dir(user);
