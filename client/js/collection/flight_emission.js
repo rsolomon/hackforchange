@@ -1,10 +1,6 @@
 co2.collection.FlightEmissionCollection = co2.collection.AMEECollection.extend({
   data: {
     'path': '/3.6/categories/Great_Circle_flight_methodology/calculation'
-
-//    //TEMP
-//    'values.IATAcode1': 'LHR',
-//    'values.IATAcode2': 'LAX'
   },
 
   fetch: function(options) {
@@ -20,5 +16,11 @@ co2.collection.FlightEmissionCollection = co2.collection.AMEECollection.extend({
 
   parse: function(data) {
     return data.output.amounts;
+  },
+
+  findDefault: function() {
+    return this.find(function(model) {
+      return model.get('default');
+    });
   }
 });
