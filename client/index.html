@@ -41,6 +41,7 @@
       </div>
       <div id="carbonizer" class="hide">
         App
+        <button class="logout">Log Out</button>
       </div>
   </div>
 
@@ -52,78 +53,19 @@
     <script src="lib/bootstrap/js/bootstrap.js"></script>
     <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.0.12.min.js"></script>
     <script src="js/common/namespace.js"></script>
+    <script src="js/router/router.js"></script>
+    <script src="js/view/app.js"></script>
+    <script src="js/view/signup.js"></script>
     <script src="js/collection/base_amee.js"></script>
     <script src="js/collection/flight_emission.js"></script>
     <script src="js/collection/flight.js"></script>
     <script>
       $(function() {
         'use strict'
-        co2.view.AppView = Backbone.View.extend({
-          el: "#carbonizer",
-
-          initialize: function() {
-            this.render();
-          },
-
-          render: function() {
-            this.$el.show();
-          }
-        });
-        co2.view.SignupView = Backbone.View.extend({
-          el: "#signup-view",
-
-          signupForm: $("#signup"),
-          loginForm: $("#login"),
-
-          events: {
-            "submit #login": "login",
-            "submit #signup": "signup",
-          },
-
-          initialize: function() {
-            this.render();
-          },
-
-          render: function() {
-            this.$el.show();
-          },
-
-          login: function() {
-            var loginData =  this.loginForm.formParams();
-            Parse.User.logIn(loginData.email, loginData.password, {
-              success: function(user) {
-                console.log("success");
-              },
-              error: function(user, error) {
-                console.log("error " + error);
-              }
-            });
-            return false;
-          },
-
-          signup: function() {
-            var signupData = this.signupForm.formParams(),
-              user = new Parse.User();
-            signupData.username = signupData.email;
-            user.set(signupData);
-            user.signUp(null, {
-              success: function(user) {
-                console.dir(user);
-              },
-              error: function(user, error) {
-                console.dir(user);
-                console.dir(error);
-              }
-            });
-            return false;
-          }
-        });
-        //Parse.User.logOut();
-        if (Parse.User.current()) {
-          new co2.view.AppView();
-        } else {
-          new co2.view.SignupView();
-        }
+        var usePushState = false; // change when deployed
+        co2.appRouter = new co2.router.Router();
+        Backbone.history.start({ pushState: usePushState });
+        co2.appRouter.navigate("app", { trigger: true });
       });
     </script>
   </body>
