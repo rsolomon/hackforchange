@@ -9,17 +9,19 @@ co2.view.IntervalStatsView = Backbone.View.extend({
         var ticks = [],
           driveTotals = [],
           flightTotals = [],
+          utilityTotals = [],
           overallTotals = [];
 
         _.each(statsModel.get('monthly'), function(tObj, date) {
           ticks.push(self.months[parseInt(date.substr(5), 10) - 1]);
           driveTotals.push(tObj['drive'] ? tObj['drive'] : 0);
           flightTotals.push(tObj['flight'] ? tObj['flight'] : 0);
+          utilityTotals.push(tObj['utils'] ? tObj['utils'] : 0);
           overallTotals.push(tObj['total'] ? tObj['total'] : 0);
         });
 
         //var ser
-        window.plot1 = $.jqplot('line-graph', [driveTotals, flightTotals, overallTotals], {
+        window.plot1 = $.jqplot('line-graph', [driveTotals, flightTotals, utilityTotals, overallTotals], {
           // The "seriesDefaults" option is an options object that will
           // be applied to all series in the chart.
           seriesDefaults:{
@@ -32,6 +34,7 @@ co2.view.IntervalStatsView = Backbone.View.extend({
           series:[
             {label:'Driving emissions'},
             {label:'Flight emissions'},
+            {label:'Utility emissions'},
             {label:'Total emissions'}
           ],
           // Show the legend and put it outside the grid, but inside the
