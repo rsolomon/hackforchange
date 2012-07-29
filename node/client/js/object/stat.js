@@ -1,4 +1,4 @@
-co2.object.Co2Stat = Parse.Object.extend("Co2Stat", {
+ co2.object.Co2Stat = Parse.Object.extend("Co2Stat", {
 
   // Attributes:
   //   daily: Object, cost per day
