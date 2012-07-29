@@ -2,12 +2,35 @@ var http = require('http');
 var https = require('https');
 var url = require('url');
 var qs = require('querystring');
+var nodeStatic = require('node-static');
+var util = require('util');
+
+var file = new(nodeStatic.Server)('../client');
+
 var co2 = {
   routes: {
+    'client': function(req, res) {
+      req.addListener('end', function() {
+        file.serve(req, res, function(err, result) {
+          if (err) {
+            console.error('Error serving %s - %s', req.url, err.message);
+            if (err.status === 404 || err.status === 500) {
+              file.serveFile(util.format('/%d.html', err.status), err.status, {}, req, res);
+            } else {
+              res.writeHead(err.status, err.headers);
+              res.end();
+            }
+          } else {
+            console.log('%s - %s', req.url, res.message);
+          }
+        });
+      });
+    },
+
     /**
      * Search API for flight information
      */
-    '/flights': function(req, res) {
+    'flights': function(req, res) {
       var HOST = 'airportcode.riobard.com';
       var PATH = '/search';
 
@@ -67,7 +90,7 @@ var co2 = {
      *  - path: {path to AMEE API, minus the HOST)
      *  - any other arguments that the API needs.
      */
-    '/amee': function(req, res) {
+    'amee': function(req, res) {
       var HOST = 'api-stage.amee.com';
 
       var urlParts = url.parse(req.url, true),
@@ -101,12 +124,12 @@ var co2 = {
 
 http.createServer(function (req, res) {
   var urlParts = url.parse(req.url, true),
-    pathname = urlParts.pathname;
+    pathname = urlParts.pathname.split('/')[1];
   if (co2.routes[pathname]) {
     co2.routes[pathname](req, res);
   } else {
     res.end(pathname + ' not found.');
   }
-}).listen(1337, '127.0.0.1');
-console.log('Server running at http://127.0.0.1:1337/');
+}).listen(8080, '127.0.0.1');
+console.log('Server running at http://127.0.0.1:8080/');
 
