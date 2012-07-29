@@ -14,24 +14,25 @@
     if (this.isNew()) {
       if (!attrs.daily) {
         attrs.daily = {};
-        attrs.daily[now.format("YYYY-MM-DD")] = 0;
+        attrs.daily[now.format("YYYY-MM-DD")] = {};
       }
       if (!attrs.monthly) {
         attrs.monthly = {};
-        attrs.monthly[now.format("YYYY-MM")] = 0;
+        attrs.monthly[now.format("YYYY-MM")] = {};
       }
       if (!attrs.yearly) {
         attrs.yearly = {};
-        attrs.yearly[now.format("YYYY-MM")] = 0;
+        attrs.yearly[now.format("YYYY-MM")] = {};
       }
       if (!attrs.lifetime) {
-        attrs.lifetime = 0;
+        attrs.lifetime = {};
       }
     }
   },
 
-  addCo2Cost: function(cost, date) {
-    var self = this, end = moment(date),
+  addCo2Cost: function(event) {
+    var self = this, cost = event.get("cost"), date = event.get("date"),
+      category = event.get("category"), end = moment(date),
       daily = this.get("daily"), start, diff;
     if (daily) {
       start = _.max(_.keys(daily), function(day) {
@@ -40,10 +41,10 @@
       start = moment(start);
       diff = end.diff(start, "days");
       _.times(diff, function(i) {
-        self.setCo2CostForDate(moment(start).add("days", i), 0);
+        self.setCo2CostForDate(moment(start).add("days", i), 0, category);
       });
     }
-    self.setCo2CostForDate(end, cost);
+    self.setCo2CostForDate(end, cost, category);
   },
 
   setCo2CostForDate: function(now, cost) {
@@ -64,8 +65,8 @@
     this.set("lifetime", lifetime + cost);
   }
 }, {
-  refreshStats: function(cost) {
-    co2.stats.addCo2Cost(cost);
+  refreshStats: function(event) {
+    co2.stats.addCo2Cost(event);
     co2.stats.save({}, {
       success: function() {
         console.log("success");
