@@ -1,9 +1,11 @@
 /* General */
-
+body {
+  padding-top: 90px;
+}
 /* Signup */
 
 .signup-prompt {
-  padding-top: 40px;
+  /*padding-top: 40px;*/
 }
 
 .signup-prompt h1 {

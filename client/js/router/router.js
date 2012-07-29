@@ -1,6 +1,7 @@
 co2.router.Router = Backbone.Router.extend({
   routes: {
     "login": "login",
+    "logout": "logout",
     "app": "app"
   },
 
@@ -24,5 +25,10 @@ co2.router.Router = Backbone.Router.extend({
         co2.signUpView.$el.hide();
       }
     }
+  },
+
+  logout: function() {
+    Parse.User.logOut();
+    co2.appRouter.navigate("login", { trigger: true });
   }
 });

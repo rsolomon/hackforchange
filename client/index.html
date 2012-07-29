@@ -5,7 +5,30 @@
     <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="css/styles.css" />
   </head>
-  <body>
+  <body data-spy="scroll" data-target=".subnav" data-offset="50">
+    <div id="carbonizer" class="container hide">
+      <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <a class="brand" href="#app"><img src="img/co2-32.png"/>Carbonizr</a>
+            <div class="nav-collapse">
+              <ul class="nav">
+                <li class="active">
+                  <a href="#app">Home</a>
+                </li>
+              </ul>
+              <ul class="nav pull-right">
+                <li><a href="#settings">Settings</a></li>
+                <li><a href="#logout" class="logout">Log Out</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content">
+        App
+      </div>
+    </div>
     <div class="container">
       <div id="signup-view" class="row signup-prompt hide">
         <div class="span6">
@@ -39,11 +62,7 @@
           </form>
         </div>
       </div>
-      <div id="carbonizer" class="hide">
-        App
-        <button class="logout">Log Out</button>
-      </div>
-  </div>
+    </div>
 
     <!-- javascript -->
     <script src="http://code.jquery.com/jquery-1.7.2.js"></script>
