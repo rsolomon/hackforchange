@@ -7,27 +7,19 @@ co2.view.IntervalStatsView = Backbone.View.extend({
     var stats = Parse.User.current().get('stats').fetch({
       success: function(statsModel) {
         var ticks = [],
-          totals = [];
+          driveTotals = [],
+          flightTotals = [],
+          overallTotals = [];
 
-        _.each(_.keys(statsModel.get('monthly')), function(date) {
-         // alert(date);
-          var month = self.months[parseInt(date.substr(5), 10) - 1];
-          //alert(parseInt(date.substr(5), 10))
-          ticks.push(month);
-          totals.push(statsModel.get('monthly')[date]);
-          //alert(totals[0]);
-
-
-          // Can specify a custom tick Array.
-          // Ticks should match up one for each y value (category) in the series.
-          //var ticks = ['May', 'June', 'July', 'August'];
-
-
-          //alert(month);
+        _.each(statsModel.get('monthly'), function(tObj, date) {
+          ticks.push(self.months[parseInt(date.substr(5), 10) - 1]);
+          driveTotals.push(tObj['drive'] ? tObj['drive'] : 0);
+          flightTotals.push(tObj['flight'] ? tObj['flight'] : 0);
+          overallTotals.push(tObj['total'] ? tObj['total'] : 0);
         });
 
         //var ser
-        window.plot1 = $.jqplot('line-graph', [totals], {
+        window.plot1 = $.jqplot('line-graph', [driveTotals, flightTotals, overallTotals], {
           // The "seriesDefaults" option is an options object that will
           // be applied to all series in the chart.
           seriesDefaults:{
@@ -38,6 +30,8 @@ co2.view.IntervalStatsView = Backbone.View.extend({
           // option on the series option.  Here a series option object
           // is specified for each series.
           series:[
+            {label:'Driving emissions'},
+            {label:'Flight emissions'},
             {label:'Total emissions'}
           ],
           // Show the legend and put it outside the grid, but inside the

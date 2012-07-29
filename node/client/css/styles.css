@@ -60,6 +60,15 @@ body {
      text-align: center;
  }
 
+#tab-info-food {
+    text-align: center;
+    padding: 25px;
+}
+
+#tab-info-food div {
+    margin-top: 25px;
+}
+
 .add-drive .tab-block.tab-block-right ul {
     margin: 0;
     list-style: none;
@@ -71,6 +80,11 @@ body {
 
 #add-info .tab-pane {
     padding: 0 15px 15px 15px;
+}
+
+.title {
+    width: 80%;
+    text-align: center;
 }
 
 
