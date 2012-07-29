@@ -30,8 +30,8 @@
     }
   },
 
-  addCo2Cost: function(cost) {
-    var end = moment(new Date()),
+  addCo2Cost: function(cost, date) {
+    var self = this, end = moment(date),
       daily = this.get("daily"), start, diff;
     if (daily) {
       start = _.max(_.keys(daily), function(day) {
