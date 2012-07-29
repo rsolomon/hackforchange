@@ -15,24 +15,49 @@ var co2 = {
         query = urlParts.query;
 
       query.fmt = 'JSON';
+      if (query.query) {
+        query.q = query.query;
+        delete query.query;
+      }
 
       res.writeHead(200, {
         'Content-Type': 'text/json',
         'Access-Control-Allow-Origin': '*'
       });
 
+      var resp = {
+        query: query.q,
+        suggestions: [],
+        data: []
+      };
+
       var data = qs.stringify(query);
       http.get({
         host: HOST,
         path: [PATH, data].join('?'),
         headers: {
-          'Accept': 'application/json',
+          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
           'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
           'Accept-encoding': 'gzip,deflate,sdch'
         }
       }, function(response) {
         response.on('data', function(d) {
-          res.end(d);
+          var cleaned = d.toString('utf-8');
+
+          // Yea a try/catch. It's a hackathon!
+          try {
+            var data = JSON.parse(cleaned);
+          } catch (err) {
+            res.end(JSON.stringify(resp));
+            return true;
+          }
+          for (var i = 0; i < data.length; i++) {
+            var entry = data[i];
+            resp.suggestions.push(entry['name']);
+            resp.data.push(entry['code']);
+          }
+
+          res.end(JSON.stringify(resp));
         });
       }).end();
     },

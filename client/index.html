@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <!-- Stylesheets -->
+    <link rel="stylesheet" href="lib/autocomplete/styles.css" />
     <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="css/styles.css" />
   </head>
@@ -26,6 +27,7 @@
         </div>
       </div>
       <div class="content">
+        <div class="add-flight"></div>
         App
       </div>
     </div>
@@ -70,6 +72,8 @@
     <script src="lib/underscore/underscore.js"></script>
     <script src="lib/backbone/backbone.js"></script>
     <script src="lib/bootstrap/js/bootstrap.js"></script>
+    <script src="lib/handlebars/handlebars.js"></script>
+    <script src="lib/autocomplete/jquery.autocomplete.js"></script>
     <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.0.12.min.js"></script>
     <script src="js/common/namespace.js"></script>
     <script src="js/router/router.js"></script>
@@ -78,14 +82,32 @@
     <script src="js/collection/base_amee.js"></script>
     <script src="js/collection/flight_emission.js"></script>
     <script src="js/collection/flight.js"></script>
+    <script src="js/view/add_flight.js"></script>
     <script>
       $(function() {
+        var addFlightView = new co2.view.AddFlightView({
+          el: '.add-flight'
+        });
+
         'use strict'
         var usePushState = false; // change when deployed
         co2.appRouter = new co2.router.Router();
         Backbone.history.start({ pushState: usePushState });
         co2.appRouter.navigate("app", { trigger: true });
       });
+    </script>
+
+
+    <!-- TEMPLATES -->
+    <script id="template-add-flight" type="text/x-handlebars-template">
+      <h3>Add Flight</h3>
+      <label>Departing Airport:
+        <input type="text" />
+      </label>
+      <label>Arriving Airport:
+        <input type="text" />
+      </label>
+      <button>Add</button>
     </script>
   </body>
 </html>
