@@ -18,6 +18,23 @@ window.co2.view.AddFlightView = Backbone.View.extend({
   },
 
   initialize: function() {
+    var self = this;
+    this.collection.on('reset', function(collection) {
+      var co2Model = collection.findDefault();
+      var event = new co2.object.Co2Event({
+        category: 'flight',
+        cost: co2Model.get('value'),
+        date: new Date(this.$('.flight-date').val())
+      });
+      event.save({
+        error: function() {
+          alert('error saving... :(');
+        },
+        success: function() {
+          self.render();
+        }
+      });
+    }, this);
 
     // Initialize templates
     this._addFlightFormTemplate = Handlebars.compile($(this._addFlightFormTemplate).html());
