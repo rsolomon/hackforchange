@@ -67,7 +67,8 @@
     <script>
       $(function() {
         var addFlightView = new co2.view.AddFlightView({
-          el: '.add-flight'
+          el: '.add-flight',
+          collection: new co2.collection.FlightEmissionCollection
         });
 
         'use strict'
@@ -83,10 +84,10 @@
     <script id="template-add-flight" type="text/x-handlebars-template">
       <h3>Add Flight</h3>
       <label>Departing Airport:
-        <input type="text" />
+        <input class="flight-departing" type="text" />
       </label>
       <label>Arriving Airport:
-        <input type="text" />
+        <input class="flight-arriving" type="text" />
       </label>
       <button>Add</button>
     </script>
