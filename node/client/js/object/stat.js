@@ -47,22 +47,31 @@
     self.setCo2CostForDate(end, cost, category);
   },
 
-  setCo2CostForDate: function(now, cost) {
+  setCo2CostForDate: function(now, cost, category) {
     var date = now.format("YYYY-MM-DD"),
       month = now.format("YYYY-MM"),
       year = now.format("YYYY"),
       daily, monthly, yearly, lifetime;
-    daily = this.get("daily") || {};
-    daily[date] = daily[date] ? daily[date] + cost : cost;
-    this.set("daily", daily);
-    monthly = this.get("monthly") || {};
-    monthly[month] = monthly[month] ? monthly[month] + cost : cost;
-    this.set("monthly", monthly);
-    yearly = this.get("yearly") || {};
-    yearly[year] = yearly[year] ? yearly[year] + cost : cost;
-    this.set("yearly", yearly);
-    lifetime = this.get("lifetime") || 0;
-    this.set("lifetime", lifetime + cost);
+    this._setBucket("daily", date, cost, category);
+    this._setBucket("monthly", month, cost, category);
+    this._setBucket("yearly", year, cost, category);
+    lifetime = this.get("lifetime") || {};
+    lifetime[category] = lifetime[category] || 0;
+    lifetime[category] = lifetime[category] ? lifetime[category] + cost : cost;
+    lifetime.total = lifetime.total ? lifetime.total + cost : cost;
+    this.set("lifetime", lifetime);
+  },
+
+  _setBucket: function(type, key, cost, category) {
+    bucket = this.get(type) || {};
+    bucket[key] = bucket[key] || {};
+    if (bucket[key][category]) {
+      bucket[key][category] = bucket[key][category] + cost;
+    } else {
+      bucket[key][category] = cost;
+    }
+    bucket[key].total = bucket[key].total ? bucket[key].total + cost : cost;
+    this.set(type, bucket);
   }
 }, {
   refreshStats: function(event) {
@@ -71,6 +80,14 @@
       success: function() {
         console.log("success");
       }
+    });
+  },
+  clearMyStats: function(event) {
+    co2.stats.set({
+      daily: {},
+      monthly: {},
+      yearly: {},
+      lifetime: {}
     });
   }
 });
