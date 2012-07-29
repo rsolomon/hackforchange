@@ -28,5 +28,5 @@ window.co2.view.AppView = Backbone.View.extend({
 
   render: function() {
     this.$el.show();
-  },
+  }
 });

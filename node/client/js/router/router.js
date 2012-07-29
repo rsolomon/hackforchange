@@ -2,7 +2,8 @@ co2.router.Router = Backbone.Router.extend({
   routes: {
     "login": "login",
     "logout": "logout",
-    "app": "app"
+    "app": "app",
+    "social": "social"
   },
 
   login: function() {
@@ -27,6 +28,12 @@ co2.router.Router = Backbone.Router.extend({
           if (co2.signUpView) {
             co2.signUpView.$el.hide();
           }
+          if (co2.socialView) {
+            co2.socialView.$el.hide();
+          }
+          $('#content-app').show();
+          $('.nav-app').addClass('active');
+          $('.nav-social').removeClass('active');
         }
       });
     }
@@ -35,5 +42,17 @@ co2.router.Router = Backbone.Router.extend({
   logout: function() {
     Parse.User.logOut();
     co2.appRouter.navigate("login", { trigger: true });
+  },
+
+  social: function() {
+    $('#content-app').hide();
+    if (!co2.socialView) {
+      co2.socialView = new co2.view.SocialView;
+    } else {
+      co2.socialView.$el.show();
+    }
+    $('.nav-app').removeClass('active');
+    $('.nav-social').addClass('active');
+    //alert('HEY!');
   }
 });
