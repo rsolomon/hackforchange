@@ -32,6 +32,7 @@ window.co2.view.AddFlightView = Backbone.View.extend({
         },
         success: function() {
           self.render();
+          self.model.fetch();
         }
       });
     }, this);

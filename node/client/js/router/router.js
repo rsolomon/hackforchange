@@ -23,12 +23,12 @@ co2.router.Router = Backbone.Router.extend({
       new Parse.Query("Co2Stat").get(Parse.User.current().get("stats").id, {
         success: function(stats) {
           window.co2.stats = stats;
+          co2.appView = new co2.view.AppView();
+          if (co2.signUpView) {
+            co2.signUpView.$el.hide();
+          }
         }
       });
-      co2.appView = new co2.view.AppView();
-      if (co2.signUpView) {
-        co2.signUpView.$el.hide();
-      }
     }
   },
 

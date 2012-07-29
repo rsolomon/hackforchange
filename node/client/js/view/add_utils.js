@@ -25,6 +25,7 @@ window.co2.view.AddUtilsView = Backbone.View.extend({
         },
         success: function() {
           self.render();
+          self.model.fetch();
         }
       });
     }
