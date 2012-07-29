@@ -17,3 +17,5 @@ APIs and technologies used:
 - jQuery
 - Underscore.js
 - JQPlot
+- Twitter Bootstrap
+- Font Awesome
