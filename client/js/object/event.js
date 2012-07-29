@@ -13,5 +13,12 @@ co2.object.Co2Event = Parse.Object.extend("Co2Event", {
       },
       error: options.error
     });
+  },
+  Category: {
+    FLIGHT: "flight",
+    CAR: "car",
+    PUBLIC_TRANSPORT: "public_transport",
+    UTILITY: "utility",
+    FOOD: "food"
   }
 });
