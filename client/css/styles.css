@@ -17,3 +17,8 @@ body {
 .score h2, h3 {
   display: inline;
 }
+
+.span6 {
+    background-color: #eeeeee;
+}
+
