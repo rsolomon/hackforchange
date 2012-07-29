@@ -1,2 +1,3 @@
 www:
-  type: static
+  type: nodejs
+  approot: node
