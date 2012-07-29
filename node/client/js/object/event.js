@@ -10,16 +10,10 @@ co2.object.Co2Event = Parse.Object.extend("Co2Event", {
     this.set("parent", user);
   },
 
-  updateStats: function() {
-    var  user = Parse.User.current(),
-      stats;
-      stats = user.get("stats");
-    stats.addCo2Cost(this.get("cost"));
-    stats.save({}, {
-      success: function() {
-        console.log("success");
-      }
-    });
+  save: function(arg1, arg2, arg3) {
+    Parse.Object.prototype.save.call(this, arg1, arg2, arg3);
+    // Update the user stats automatically
+    co2.object.Co2Stat.refreshStats(this.get("cost"));
   }
 }, {
   findForUser: function(options) {
