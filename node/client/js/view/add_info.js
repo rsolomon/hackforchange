@@ -10,5 +10,9 @@ co2.view.AddInfoView = Backbone.View.extend({
     this.addDriveView = new co2.view.AddDriveView({
       el: '.add-drive'
     });
+
+    this.addUtilsView = new co2.view.AddUtilsView({
+      el: '.add-utils'
+    });
   }
 });

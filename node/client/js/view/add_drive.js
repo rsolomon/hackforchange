@@ -1,5 +1,5 @@
 window.co2.view.AddDriveView = Backbone.View.extend({
-  _addFlightFormTemplate: '#template-add-drive',
+  _addDriveFormTemplate: '#template-add-drive',
 
   events: {
     'click button': 'onSubmitClick'
@@ -32,13 +32,13 @@ window.co2.view.AddDriveView = Backbone.View.extend({
   initialize: function() {
 
     // Initialize templates
-    this._addFlightFormTemplate = Handlebars.compile($(this._addFlightFormTemplate).html());
+    this._addDriveFormTemplate = Handlebars.compile($(this._addDriveFormTemplate).html());
 
     this.render();
   },
 
   render: function() {
-    this.$el.html(this._addFlightFormTemplate());
+    this.$el.html(this._addDriveFormTemplate());
     this.$('.drive-date').datepicker();
   }
 });
