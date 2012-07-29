@@ -34,6 +34,8 @@ var co2 = {
         'Content-Type': 'text/json',
         'Access-Control-Allow-Origin': '*'
       });
+      console.log("query " + query);
+      query = '';
       res.end('<?xml version="1.0" encoding="UTF-8" ?>" +
           '<Response>' +
               '<Sms>Query = ' + query + '</Sms>' +
