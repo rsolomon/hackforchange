@@ -23,11 +23,18 @@ body {
 }
 
 #add-info, #notifications {
-    height: 350px; margin-top: 25px;
+    height: 385px; margin-top: 25px;
 }
 
-#notifications .table-notification-container {
-    padding: 15px;
+.table-notification-container {
+    overflow: auto;
+    height: 150px;
+}
+
+#notifications h4 {
+    margin-left: 15px;
+    margin-top: 15px;
+    margin-bottom: 10px;
 }
 
 #notifications .icon-warning-sign {
