@@ -2,7 +2,19 @@ window.co2.view.AddDriveView = Backbone.View.extend({
   _addDriveFormTemplate: '#template-add-drive',
 
   events: {
-    'click button': 'onSubmitClick'
+    'click button': 'onSubmitClick',
+    'click .drive-ms6': 'onMazdaClick',
+    'click .drive-sub': 'onSubiClick'
+  },
+
+  onMazdaClick: function(e) {
+    this.$('.drive-mileage').val('19');
+    return false;
+  },
+
+  onSubiClick: function(e) {
+    this.$('.drive-mileage').val('23');
+    return false;
   },
 
   onSubmitClick: function() {
@@ -14,7 +26,7 @@ window.co2.view.AddDriveView = Backbone.View.extend({
       var gallons = distance / mileage;
       var calcCarbon = gallons * (19/6);
       var event = new co2.object.Co2Event({
-        category: 'flight',
+        category: 'drive',
         cost: calcCarbon,
         date: new Date(this.$('.drive-date').val())
       });

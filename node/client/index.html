@@ -5,6 +5,7 @@
     <title>Carbonizr</title>
     <link rel="stylesheet" href="lib/autocomplete/styles.css" />
     <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="lib/jqplot/jquery.jqplot.min.css" />
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body data-spy="scroll" data-target=".subnav" data-offset="50">
@@ -29,13 +30,14 @@
       </div>
       <div class="content">
         <div class="row">
-          <div class="span12">
+          <div id="stats" class="span12">
             <div class="row">
-              <div id="charts" class="span7">
-                <img src="http://fiveashrenovations.com/images/carbon_pie_chart.jpg"/>
+              <div id="charts" class="span5">
+                <div id="pie4"></div>
               </div>
-              <div id="score" class="score span5 bottom">
-                <h2>10 CO<sup>2</sup> tons</h2> this month
+              <div id="interval-stats" class="score span7 bottom">
+                <div id="line-graph"></div>
+                <!--<h2>10 CO<sup>2</sup> tons</h2> this month
                 <div class="progress progress-success">
                   <div class="bar" style="width: 30%"></div>
                 </div>
@@ -43,7 +45,7 @@
                 <div class="progress progress-danger">
                   <div class="bar" style="width: 80%"></div>
                 </div>
-                <button class="btn btn-primary pull-right">More</button>
+                <button class="btn btn-primary pull-right">More</button>-->
               </div>
             </div>
           </div>
@@ -73,7 +75,29 @@
             </div>
           </div>
           <div id="notifications" class="span6">
-            Bla bla bla
+            <div class="table-notification-container">
+              <table class="table table-striped">
+                <thead>
+                  <tr><th>
+                    Notifications
+                  </th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><i class="icon-warning-sign"></i> You've driven more than 1000 miles in June.</td>
+                  </tr>
+                  <tr>
+                    <td><i class="icon-warning-sign"></i> Your gas bill was unusually high in November.</td>
+                  </tr>
+                  <tr>
+                    <td><i class="icon-check"></i> You met all of your goals in March.</td>
+                  </tr>
+                  <tr>
+                    <td><i class="icon-warning-sign"></i> Your daily commute is very short. Biking could save 55lbs of CO2 per week.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -123,6 +147,13 @@
     <script src="lib/handlebars/handlebars.js"></script>
     <script src="lib/autocomplete/jquery.autocomplete.js"></script>
     <script src="lib/moment/moment.min.js"></script>
+
+    <script src="lib/jqplot/jquery.jqplot.min.js"></script>
+    <script src="lib/jqplot/plugins/jqplot.pieRenderer.min.js"></script>
+    <script src="lib/jqplot/plugins/jqplot.barRenderer.min.js"></script>
+    <script src="lib/jqplot/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+    <script src="lib/jqplot/plugins/jqplot.pointLabels.min.js"></script>
+
     <script src="http://www.parsecdn.com/js/parse-1.0.12.js"></script>
     <script src="js/common/namespace.js"></script>
     <script src="js/router/router.js"></script>
@@ -134,6 +165,8 @@
     <script src="js/collection/flight_emission.js"></script>
     <script src="js/collection/food_emission.js"></script>
     <script src="js/collection/flight.js"></script>
+    <script src="js/view/stats.js"></script>
+    <script src="js/view/interval-stats.js"></script>
     <script src="js/view/add_drive.js"></script>
     <script src="js/view/add_flight.js"></script>
     <script src="js/view/add_utils.js"></script>
@@ -145,6 +178,14 @@
         co2.appRouter = new co2.router.Router();
         Backbone.history.start({ pushState: usePushState });
         co2.appRouter.navigate("app", { trigger: true });
+
+        var statsView = new co2.view.StatsView({
+          el: "#stats"
+        });
+
+        var intervalStatsView = new co2.view.IntervalStatsView({
+          el: "#interval-stats"
+        });
 
         var addInfoView = new co2.view.AddInfoView({
           el: '#add-info'
@@ -168,28 +209,43 @@
     </script>
 
     <script id="template-add-drive" type="text/x-handlebars-template">
-      <h3>Add Car Trip</h3>
-      <label>Mileage</label>
-      <input class="drive-mileage" type="text" />
-      <label>Distance</label>
-      <input class="drive-distance" type="text" />
-      <label>Date</label>
-      <input class="drive-date" type="text" />
-      <div class="button-row">
-        <button>Add</button>
+      <div class="tab-block tab-block-left">
+        <h3>Add Car Trip</h3>
+        <label>Mileage</label>
+        <input class="drive-mileage" type="text" />
+        <label>Distance</label>
+        <input class="drive-distance" type="text" />
+        <label>Date</label>
+        <input class="drive-date" type="text" />
+        <div class="button-row">
+          <button>Add</button>
+        </div>
+      </div>
+      <div class="tab-block tab-block-right">
+        <h3>Your Cars</h3>
+        <ul>
+          <li><a href="#" class="drive-ms6">2007 Mazdaspeed6</a></li>
+          <li><a href="#" class="drive-sub">2012 Subaru Forester</a></li>
+        </ul>
       </div>
     </script>
 
     <script id="template-add-utils" type="text/x-handlebars-template">
-      <h3>Add Your Utility Bill</h3>
-      <label>Gas (ccf)</label>
-      <input class="utils-gas" type="text" />
-      <label>Electricity (kH)</label>
-      <input class="utils-electricity" type="text" />
-      <label>Date</label>
-      <input class="utils-date" type="text" />
-      <div class="button-row">
-        <button>Add</button>
+      <div class="tab-block tab-block-left">
+        <h3>Add Your Utility Bill</h3>
+        <label>Gas (ccf)</label>
+        <input class="utils-gas" type="text" />
+        <label>Electricity (kH)</label>
+        <input class="utils-electricity" type="text" />
+        <label>Date</label>
+        <input class="utils-date" type="text" />
+        <div class="button-row">
+          <button>Add</button>
+        </div>
+      </div>
+      <div class="tab-block tab-block-right">
+        <h3>OR</h3>
+        <div><button>Import from PG&E</button></div>
       </div>
     </script>
   </body>

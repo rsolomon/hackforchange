@@ -15,7 +15,7 @@ window.co2.view.AddUtilsView = Backbone.View.extend({
         electricityCarbon = electricity * 2;
 
       var event = new co2.object.Co2Event({
-        category: 'flight',
+        category: 'utils',
         cost: gasCarbon + electricityCarbon,
         date: new Date(this.$('.utils-date').val())
       });

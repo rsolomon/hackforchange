@@ -22,11 +22,56 @@ body {
     background-color: #eeeeee;
 }
 
+#add-info, #notifications {
+    height: 350px; margin-top: 25px;
+}
+
+#notifications .table-notification-container {
+    padding: 15px;
+}
+
+#notifications .icon-warning-sign {
+    color: maroon
+}
+
+#notifications .icon-check {
+    color: darkgreen
+}
+
 #add-info .nav li {
     font-size: 24px;
+}
+
+.tab-block {
+    float: left;
+}
+
+.tab-block.tab-block-right {
+    width: 175px;
+    margin-left: 35px;
+}
+
+.tab-block.tab-block-right button {
+    margin-top: 18px;
+}
+
+.add-utils .tab-block.tab-block-right {
+     padding-top: 70px;
+     text-align: center;
+ }
+
+.add-drive .tab-block.tab-block-right ul {
+    margin: 0;
+    list-style: none;
+}
+
+.add-drive .tab-block.tab-block-right li {
+    margin: 10px 0;
 }
 
 #add-info .tab-pane {
     padding: 0 15px 15px 15px;
 }
+
+
 
