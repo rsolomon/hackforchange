@@ -30,6 +30,14 @@ body {
     padding: 15px;
 }
 
+#notifications .icon-warning-sign {
+    color: maroon
+}
+
+#notifications .icon-check {
+    color: darkgreen
+}
+
 #add-info .nav li {
     font-size: 24px;
 }
