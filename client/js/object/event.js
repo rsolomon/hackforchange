@@ -1,5 +1,10 @@
 co2.object.Co2Event = Parse.Object.extend("Co2Event", {
 
+  // Attributes:
+  //   date : Date
+  //   cost: number
+  //   category: co2.object.Co2Event.Category
+
   initialize: function(attrs) {
     this.set("parent", Parse.User.current());
   }
