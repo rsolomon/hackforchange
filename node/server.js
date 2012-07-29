@@ -109,6 +109,7 @@ var co2 = {
         path: [path, data].join('?'),
         auth: 'delpharah' + ':' + 'usjr2h67',
         headers: {
+          'Authorization': 'Basic ' + new Buffer('delpharah' + ':' + 'usjr2h67').toString('base64'),
           'Accept': 'application/json',
           'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
           'Accept-encoding': 'gzip,deflate,sdch'

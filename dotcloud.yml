@@ -1,11 +1,3 @@
 www:
   type: nodejs
   approot: node
-nodejs:
-  type: custom
-  buildscript: nodejs/builder
-  ports:
-    www: http
-  process: node server.js
-  approot: node # change this to your application root!
-  node_version: v0.6.5
