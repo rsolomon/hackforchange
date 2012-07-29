@@ -46,7 +46,7 @@ window.co2.view.AddFlightView = Backbone.View.extend({
     this.$el.html(this._addFlightFormTemplate());
 
     var options = {
-      serviceUrl: 'http://localhost:1337/flights',
+      serviceUrl: '/flights',
       width: 250,
       delimiter: /(,|;)\s*/,
       deferRequestBy: 10, //miliseconds
