@@ -27,7 +27,7 @@ co2.view.IntervalStatsView = Backbone.View.extend({
         });
 
         //var ser
-        var plot1 = $.jqplot('line-graph', [totals], {
+        window.plot1 = $.jqplot('line-graph', [totals], {
           // The "seriesDefaults" option is an options object that will
           // be applied to all series in the chart.
           seriesDefaults:{
