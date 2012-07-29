@@ -18,7 +18,11 @@ window.co2.view.SignupView = Backbone.View.extend({
   },
 
   login: function() {
-    var self = this, loginData =  self.loginForm.formParams();
+    var self = this,
+      loginData = {
+        'email': self.loginForm.find('input[name=email]').val(),
+        'password': self.loginForm.find('input[name=password]').val()
+      };
     Parse.User.logIn(loginData.email, loginData.password, {
       success: function(user) {
         self.loginForm[0].reset();
@@ -32,7 +36,12 @@ window.co2.view.SignupView = Backbone.View.extend({
   },
 
   signup: function() {
-    var self = this, signupData = self.signupForm.formParams(),
+    var self = this,
+      signupData = {
+        'name': self.signupForm.find('input[name=name]').val(),
+        'password': self.signupForm.find('input[name=password]').val(),
+        'email': self.signupForm.find('input[name=email]').val()
+      },
       user = new Parse.User();
     signupData.username = signupData.email;
     user.set("username", signupData.email);
