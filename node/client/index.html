@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
   <head>
     <!-- Stylesheets -->
     <title>Carbonizr</title>
@@ -33,9 +33,11 @@
           <div id="stats" class="span12">
             <div class="row">
               <div id="charts" class="span5">
+                <div class='title'><h3>Yearly</h3></div>
                 <div id="pie4"></div>
               </div>
               <div id="interval-stats" class="score span7 bottom">
+                <div class='title'><h3>Monthly</h3></div>
                 <div id="line-graph"></div>
                 <!--<h2>10 CO<sup>2</sup> tons</h2> this month
                 <div class="progress progress-success">
@@ -70,7 +72,10 @@
                 <div class="add-utils"></div>
               </div>
               <div class="tab-pane" id="tab-info-food">
-                COMING SOON
+                <h3>Food</h3>
+                <div>
+                  <button>Import from Excel</button>
+                </div>
               </div>
             </div>
           </div>
@@ -84,10 +89,10 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td><i class="icon-warning-sign"></i> You've driven more than 1000 miles in June.</td>
+                    <td><i class="icon-warning-sign"></i> Your driving habits emitted more than expected in January.</td>
                   </tr>
                   <tr>
-                    <td><i class="icon-warning-sign"></i> Your gas bill was unusually high in November.</td>
+                    <td><i class="icon-warning-sign"></i> Your gas emissions were unusually high in November.</td>
                   </tr>
                   <tr>
                     <td><i class="icon-check"></i> You met all of your goals in March.</td>
@@ -236,7 +241,7 @@
       </div>
       <div class="tab-block tab-block-right">
         <h3>OR</h3>
-        <div><button>Import from PG&E</button></div>
+        <div><a href="https://www.pge.com/eum/login?TYPE=100663297&REALMOID=06-908d4385-f04b-1024-9b18-8304711d0cb3&GUID=&SMAUTHREASON=0&METHOD=GET&SMAGENTNAME=www.pge.com&TARGET=-SM-https%3a%2f%2fwww%2epge%2ecom%2fmyenergyweb%2fappmanager%2fpge%2fcustomer"><button>Import from PG&E</button></a></div>
       </div>
     </script>
     <script id="template-recent-events" type="text/x-handlebars-template">
