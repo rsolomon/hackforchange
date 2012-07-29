@@ -15,7 +15,7 @@ co2.view.StatsView = Backbone.View.extend({
       var plot4 = $.jqplot('pie4', [[["Driving",driveTotal],["Flights", flightTotal],["Utilities",utilityTotal]]], {
         seriesDefaults:{
           renderer:$.jqplot.PieRenderer,
-          rendererOptions:{ sliceMargin: 0 }
+          rendererOptions:{ sliceMargin: 0, showDataLabels: true }
         },
         grid:{borderWidth:0, shadow:false},
         legend:{ show: true }
