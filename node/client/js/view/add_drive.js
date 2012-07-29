@@ -36,6 +36,7 @@ window.co2.view.AddDriveView = Backbone.View.extend({
         },
         success: function() {
           self.render();
+          self.model.fetch();
         }
       });
     }

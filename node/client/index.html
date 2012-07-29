@@ -7,7 +7,16 @@
     <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="lib/jqplot/jquery.jqplot.min.css" />
     <link rel="stylesheet" href="css/styles.css" />
+
+    <!-- needs to be here -->
+    <script type="text/javascript" src="//api.filepicker.io/v0/filepicker.js"></script>
+    <script type="text/javascript">
+      //Seting up Filepicker.io with your api key
+      filepicker.setKey('AHwMHQupwRjqDIjUW8dFCz');
+    </script>
   </head>
+
+
   <body data-spy="scroll" data-target=".subnav" data-offset="50">
     <div id="carbonizer" class="container hide">
       <div class="navbar navbar-fixed-top">
@@ -74,7 +83,8 @@
               <div class="tab-pane" id="tab-info-food">
                 <h3>Food</h3>
                 <div>
-                  <button>Import from Excel</button>
+                  <h3>Import from Excel</h3>
+                  <input type="filepicker-dragdrop"/>
                 </div>
               </div>
             </div>
@@ -184,17 +194,24 @@
         Backbone.history.start({ pushState: usePushState });
         co2.appRouter.navigate("app", { trigger: true });
 
+        var stats = Parse.User.current().get('stats');
+
         var statsView = new co2.view.StatsView({
-          el: "#stats"
+          el: "#stats",
+          model: stats
         });
 
         var intervalStatsView = new co2.view.IntervalStatsView({
-          el: "#interval-stats"
+          el: "#interval-stats",
+          model: stats
         });
 
         var addInfoView = new co2.view.AddInfoView({
-          el: '#add-info'
+          el: '#add-info',
+          model: stats
         });
+
+        stats.fetch();
       });
     </script>
 
