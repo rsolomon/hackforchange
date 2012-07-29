@@ -6,5 +6,9 @@ co2.view.AddInfoView = Backbone.View.extend({
       el: '.add-flight',
       collection: new co2.collection.FlightEmissionCollection
     });
+
+    this.addDriveView = new co2.view.AddDriveView({
+      el: '.add-drive'
+    });
   }
 });

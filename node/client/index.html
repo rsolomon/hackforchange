@@ -59,7 +59,7 @@
 
             <div class="tab-content">
               <div class="tab-pane active" id="tab-info-car">
-                COMING SOON
+                <div class="add-drive"></div>
               </div>
               <div class="tab-pane" id="tab-info-plane">
                 <div class="add-flight"></div>
@@ -133,6 +133,7 @@
     <script src="js/collection/base_amee.js"></script>
     <script src="js/collection/flight_emission.js"></script>
     <script src="js/collection/flight.js"></script>
+    <script src="js/view/add_drive.js"></script>
     <script src="js/view/add_flight.js"></script>
     <script src="js/view/add_info.js"></script>
     <script>
@@ -159,6 +160,19 @@
       <input class="flight-arriving" type="text" />
       <label>Date</label>
       <input class="flight-date" type="text" />
+      <div class="button-row">
+        <button>Add</button>
+      </div>
+    </script>
+
+    <script id="template-add-drive" type="text/x-handlebars-template">
+      <h3>Add Car Trip</h3>
+      <label>Mileage</label>
+      <input class="drive-mileage" type="text" />
+      <label>Distance</label>
+      <input class="drive-distance" type="text" />
+      <label>Date</label>
+      <input class="drive-date" type="text" />
       <div class="button-row">
         <button>Add</button>
       </div>
