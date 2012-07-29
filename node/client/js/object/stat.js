@@ -89,5 +89,10 @@
       yearly: {},
       lifetime: {}
     });
+    co2.stats.save({}, {
+      success: function() {
+        console.log("success");
+      }
+    });
   }
 });
