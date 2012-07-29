@@ -18,6 +18,9 @@ co2.view.RecentEventsView = Backbone.View.extend({
   },
 
   render: function() {
+    Handlebars.registerHelper("formatNumber", function(item) {
+      return item.toFixed(2);
+    });
     Handlebars.registerHelper("formatDate", function(item) {
       return moment(new Date(item.iso)).format("ddd, Do YYYY");
     });

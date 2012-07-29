@@ -125,6 +125,12 @@
             </div>
           </div>
         </div>
+        <div class="row">
+          <div class="span12">
+            <br/>
+            <iframe id="f14a30facc" name="fdda74b94" scrolling="no" style="border: none; overflow: hidden; height: 24px; width: 450px; " title="Like this content on Facebook." class="fb_ltr " src="https://www.facebook.com/plugins/like.php?api_key=113869198637480&amp;channel_url=https%3A%2F%2Fs-static.ak.facebook.com%2Fconnect%2Fxd_arbiter.php%3Fversion%3D9%23cb%3Df3393d494c%26origin%3Dhttps%253A%252F%252Fdevelopers.facebook.com%252Ff3b26787e8%26domain%3Ddevelopers.facebook.com%26relation%3Dparent.parent&amp;extended_social_context=false&amp;href=http%3A%2F%2Fhackforchange-delpharah.dotcloud.com%2F&amp;layout=standard&amp;locale=en_US&amp;node_type=link&amp;sdk=joey&amp;send=false&amp;show_faces=true&amp;width=450"></iframe>
+          </div>
+        </div>
       </div>
     </div>
     <div class="container">
@@ -151,10 +157,6 @@
                 <input type="text" name="email" class="span5" placeholder="Email"><br/>
                 <input type="password" name="password" class="span5" placeholder="Password"><br/>
                 <button type="submit" class="btn btn-primary">Login</button>
-                <br/>
-                <br/>
-                <h5>Or</h5>
-                Do OAuth
               </div>
             </fieldset>
           </form>
@@ -271,7 +273,7 @@
           <tr>
             <td>{{formatDate date}}</td>
             <td>{{icon category}}</td>
-            <td>{{cost}} CO<sup>2</sup> Kg</td>
+            <td>{{formatNumber cost}} CO<sup>2</sup> Kg</td>
           </tr>
         {{/each}}
       </tbody>

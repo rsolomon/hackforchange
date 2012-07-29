@@ -34,8 +34,29 @@ var co2 = {
         'Content-Type': 'text/json',
         'Access-Control-Allow-Origin': '*'
       });
-      Parse = require("Parse");
-      console.log("query " + query);
+      Parse = require("./Parse.js");
+      parse = new Parse("glA2qVYleTleiRWsqapf3gdtLvH7ckbsDue1WmjX", "r54rGq1JXf624OD3XlLHRDzKVczOMmhs9uMIAl5j");
+      var number = query.From, message = query.Body;
+      parse.user({ phoneNumber: number }, function(err, response) {
+        console.log(response);
+        for (var i = 0; i < response.results.length; i++) {
+          if (response.results[i].phoneNumber === number) {
+            var user = response.results[i];
+            var event = {
+              date: new Date(),
+              cost: 15.6,
+              category: 'drive',
+              parent: user.objectId
+            };
+            parse.insert("Co2Event", event, function(err, response) {
+              console.log(err);
+              console.log(response);
+            });
+          }
+        }
+      });
+      console.log("query ");
+      console.dir(query);
       query = '';
 
       res.end('<?xml version="1.0" encoding="UTF-8" ?>' +

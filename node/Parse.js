@@ -11,12 +11,12 @@ Parse.prototype = {
   _api_protocol: require('https'),
   _api_host: 'api.parse.com',
   _api_port: 443,
-  
+
   // add object to class store
   insert: function (className, object, callback) {
     parseRequest.call(this, 'POST', '/1/classes/' + className, object, callback);
   },
-  
+
   // get objects from class store
   find: function (className, query, callback) {
     if (typeof query === 'string') {
@@ -25,12 +25,20 @@ Parse.prototype = {
       parseRequest.call(this, 'GET', '/1/classes/' + className, { where: JSON.stringify(query) }, callback);
     }
   },
-  
+
+  user: function(query, callback) {
+    if (typeof query === 'string') {
+      parseRequest.call(this, 'GET', '/1/users/' + query, null, callback);
+    } else {
+      parseRequest.call(this, 'GET', '/1/users/', { where: JSON.stringify(query) }, callback);
+    }
+  },
+
   // update an object in the class store
   update: function (className, objectId, object, callback) {
     parseRequest.call(this, 'PUT', '/1/classes/' + className + '/' + objectId, object, callback);
   },
-  
+
   // remove an object from the class store
   'delete': function (className, objectId, callback) {
     parseRequest.call(this, 'DELETE', '/1/classes/' + className + '/' + objectId, null, callback);
@@ -40,16 +48,18 @@ Parse.prototype = {
 // Parse.com https api request
 function parseRequest(method, path, data, callback) {
   var auth = 'Basic ' + new Buffer(this._application_id + ':' + this._master_key).toString('base64');
+    //Authorization: auth,
   var headers = {
-    Authorization: auth,
-    Connection: 'Keep-alive'
+    Connection: 'Keep-alive',
+    'X-Parse-Application-Id': this._application_id,
+    'X-Parse-REST-API-Key': this._master_key
   };
   var body = null;
-  
+
   switch (method) {
     case 'GET':
       if (data) {
-        path += '?' + qs.stringify(data);
+        //path += '?' + qs.stringify(data);
       }
       break;
     case 'POST':
@@ -64,7 +74,7 @@ function parseRequest(method, path, data, callback) {
     default:
       throw new Error('Unknown method, "' + method + '"');
   }
-  
+
   var options = {
     host: this._api_host,
     port: this._api_port,
@@ -72,12 +82,12 @@ function parseRequest(method, path, data, callback) {
     path: path,
     method: method
   };
-  
+
   var req = this._api_protocol.request(options, function (res) {
     if (!callback) {
       return;
     }
-    
+
     if (res.statusCode < 200 || res.statusCode >= 300) {
       var err = new Error('HTTP error ' + res.statusCode);
       err.arguments = arguments;
@@ -86,29 +96,30 @@ function parseRequest(method, path, data, callback) {
       err.body = body;
       return callback(err);
     }
-    
+
     var json = '';
     res.setEncoding('utf8');
-    
+
     res.on('data', function (chunk) {
       json += chunk;
     });
-    
+
     res.on('end', function () {
       var err = null;
       var data = null;
       try {
-        var data = JSON.parse(json);
+        console.log("raw " + json);
+        data = JSON.parse(json);
       } catch (err) {
       }
       callback(err, data);
     });
-    
+
     res.on('close', function (err) {
       callback(err);
     });
   });
-  
+
   body && req.write(body);
   req.end();
 
