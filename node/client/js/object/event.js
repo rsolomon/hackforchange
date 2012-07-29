@@ -6,7 +6,20 @@ co2.object.Co2Event = Parse.Object.extend("Co2Event", {
   //   category: co2.object.Co2Event.Category
 
   initialize: function(attrs) {
-    this.set("parent", Parse.User.current());
+    var user = Parse.User.current();
+    this.set("parent", user);
+  },
+
+  updateStats: function() {
+    var  user = Parse.User.current(),
+      stats;
+      stats = user.get("stats");
+    stats.addCo2Cost(this.get("cost"));
+    stats.save({}, {
+      success: function() {
+        console.log("success");
+      }
+    });
   }
 }, {
   findForUser: function(options) {

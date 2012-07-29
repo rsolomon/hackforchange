@@ -35,8 +35,12 @@ window.co2.view.SignupView = Backbone.View.extend({
     var self = this, signupData = self.signupForm.formParams(),
       user = new Parse.User();
     signupData.username = signupData.email;
-    user.set(signupData);
-    user.signUp(null, {
+    user.set("username", signupData.email);
+    user.set("password", signupData.password);
+    user.signUp({
+        name: signupData.name,
+        stats: new co2.object.Co2Stat()
+      }, {
       success: function(user) {
         self.signupForm[0].reset();
         co2.appRouter.navigate("app", { trigger: true });
