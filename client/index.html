@@ -14,8 +14,8 @@
             <fieldset>
               <legend>Log-in</legend>
               <div class="control-group">
-                <input type="text" class="span5" placeholder="Email"><br/>
-                <input type="password" class="span5" placeholder="Password"><br/>
+                <input type="text" name="email" class="span5" placeholder="Email"><br/>
+                <input type="password" name="password" class="span5" placeholder="Password"><br/>
                 <button type="submit" class="btn btn-primary">Login</button>
               </div>
             </fieldset>
@@ -26,9 +26,9 @@
             <fieldset>
               <legend>Sign up</legend>
               <div class="control-group">
-                <input type="text" class="span5" placeholder="Your Name"><br/>
-                <input type="text" class="span5" placeholder="Email"><br/>
-                <input type="password" class="span5" placeholder="Password"><br/>
+                <input type="text" name="name" class="span5" placeholder="Your Name"><br/>
+                <input type="text" name="email" class="span5" placeholder="Email"><br/>
+                <input type="password" name="password" class="span5" placeholder="Password"><br/>
                 <button type="submit" class="btn btn-primary">Login</button>
                 <br/>
                 <br/>
@@ -46,6 +46,7 @@
 
     <!-- javascript -->
     <script src="http://code.jquery.com/jquery-1.7.2.js"></script>
+    <script src="lib/jquerypp/jquerypp.js"></script>
     <script src="lib/underscore/underscore.js"></script>
     <script src="lib/backbone/backbone.js"></script>
     <script src="lib/bootstrap/js/bootstrap.js"></script>
@@ -53,8 +54,9 @@
     <script src="js/common/namespace.js"></script>
     <script>
       $(function() {
+        'use strict'
         co2.view.AppView = Backbone.View.extend({
-          el: $("#carbonizer"),
+          el: "#carbonizer",
 
           initialize: function() {
             this.render();
@@ -65,7 +67,7 @@
           }
         });
         co2.view.SignupView = Backbone.View.extend({
-          el: $("#signup-view"),
+          el: "#signup-view",
 
           signupForm: $("#signup"),
           loginForm: $("#login"),
@@ -84,15 +86,37 @@
           },
 
           login: function() {
-            alert("trying to login");
+            var loginData =  this.loginForm.formParams();
+            Parse.User.logIn(loginData.email, loginData.password, {
+              success: function(user) {
+                console.log("success");
+              },
+              error: function(user, error) {
+                console.log("error " + error);
+              }
+            });
+            return false;
           },
 
           signup: function() {
-            alert("trying to signup");
+            var signupData = this.signupForm.formParams(),
+              user = new Parse.User();
+            signupData.username = signupData.email;
+            user.set(signupData);
+            user.signUp(null, {
+              success: function(user) {
+                console.dir(user);
+              },
+              error: function(user, error) {
+                console.dir(user);
+                console.dir(error);
+              }
+            });
+            return false;
           }
         });
-        var loggedIn = Date.now() % 2 == 0;
-        if (loggedIn) {
+        //Parse.User.logOut();
+        if (Parse.User.current()) {
           new co2.view.AppView();
         } else {
           new co2.view.SignupView();
