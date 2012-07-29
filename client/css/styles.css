@@ -22,3 +22,7 @@ body {
     background-color: #eeeeee;
 }
 
+#add-info .nav li {
+    font-size: 24px;
+}
+
